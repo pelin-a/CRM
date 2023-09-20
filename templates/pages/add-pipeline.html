@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+{% block content %} 
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" autocomplete="off">
+          {% csrf_token %}
+        <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="lead" name="lead" placeholder="Enter Lead Name">
+            <label for="lead">Enter Lead Name</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="stage" placeholder="Stage" name="stage">
+            <label for="stage">Stage</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <select class="form-select" id="stage" placeholder="Stage" name="stage">
+              <option selected></option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="notes" placeholder="Add Notes" name="notes" >
+            <label for="stage">Add Notes</label>
+          </div>
+          <h5> Add Event</h5>
+          <div class="form-floating mb-3" >
+            <input type="date" class="form-control" id="dueDate" placeholder="Due Date" name="dueDate">
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="event" placeholder="event" name="event" >
+            <label for="stage">Enter Event</label>
+          </div>
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+    </div>
+
+</div>
+{% endblock%}
