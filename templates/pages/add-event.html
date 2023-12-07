@@ -1,0 +1,55 @@
+{% extends "base.html"%}
+{% block content %} 
+  <div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Add Event</div>
+  </center>
+  </div>
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" onsubmit="return validateForm()" autocomplete="off">
+          {% csrf_token %}  
+          <div class="form-floating mb-3" >
+            <select class="form-select"   type="number" id="contact" name="contact" >
+              <option value="0" selected>Lead*</option>
+              {%for contact in contact_names%} 
+              <option type="number" value={{contact.id}}>{{contact.first_name}} {{contact.last_name}}</option>
+          {% endfor%}
+            </select>
+            <a href="/contacts/add">
+              <button type="button" class="btn btn-secondary btn-sm">New Contact</button>
+            </a>
+            </div>
+          <br>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="event_name" placeholder="Event Name" name="event_name" required >
+            <label for="event_name">Event Name</label>
+          </div>
+            <div class="form-floating mb-3" >
+                <input type="text" class="form-control" id="event_location" placeholder="Event Location" name="event_location" >
+                <label for="event_location">Event Location</label>
+          <div class="form-floating mb-3" >
+            <input type="date" class="form-control" id="event_date" placeholder="Event Date" name="event_date" required >
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="time" class="form-control" id="event_time" placeholder="Event Time" name="event_time" required >
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="event_description" placeholder="Event Description" name="event_description" >
+            <label for="event_description">Event Description</label>
+          </div>
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+    </div>
+    <script>
+      function validateForm() {
+          var requiredContact = document.getElementById("contact").value;  
+          if (requiredContact === "0") {
+              alert("Please fill out the required fields."); 
+              return false;  
+          }
+          return true;  
+      }
+    </script>
+
+</div>
+{% endblock%}

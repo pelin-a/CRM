@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% block content %} 
+<br>
+<div class="wrapper">
+<center>
+  <h2>Events</h2>
+  </center>
+<a href="/events/add">
+    <button type="button" class="btn btn-success">Add Event</button>
+</a>
+<br>
+<br>
+<table class="table table-hover">
+    <thead>
+  <tr class="table-primary">
+    <th scope="col">N.</th>
+    <th scope="col">Lead Name</th>
+    <th scope="col">Event Name</th>
+    <th scope="col">Location</th>
+    <th scope="col">Description</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th></th>
+  </tr>
+</thead>
+<script>
+  function redirectTo(url) {
+    window.location.href = url;
+  }
+</script>
+<tbody>
+    {% for event in events %}
+    <tr onclick="redirectTo('/events/{{event.id}}')">
+        <th scope="row">{{ forloop.counter }}</th>
+        <th scope="row">{{ event.contact.first_name }}</th>
+        <th scope="row">{{ event.event_name }}</th>
+        <td>{{ event.event_location }}</td>
+        <td>{{ event.event_description }}</td>
+        <td>{{ event.event_date }}</td>
+        <td>{{ event.event_time }}</td>
+        <td>
+            <a href="/events/edit/{{ event.id }}">
+              <button type="button" class="btn btn-info">Edit</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+</table>
+</div>
+
+{% endblock%}

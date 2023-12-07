@@ -1,0 +1,75 @@
+{%extends "base.html"%}
+{% block content %} 
+{% load static%}
+<link rel="stylesheet" href="{% static 'css/table.css' %}">
+<br>
+<div class="wrapper">
+<table class="table">
+    <thead>
+  <tr class="table-primary">
+    <th scope="col">Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Organization</th>
+    <th scope="col">Email</th>
+    <th scope="col">Phone</th>
+    <th scope="col">City</th>
+    <th scope="col">Country</th>
+  </tr>
+</thead>
+<tbody>
+    <tr>
+        <th scope="row">{{ contact.first_name }}</th>
+        <th scope="row">{{ contact.last_name }}</th>
+        {% if contact.organization == True %}
+        <td>Yes</td>
+        {% else %}
+        <td>No</td>
+        {% endif %}
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.city }}</td>
+        <td>{{ contact.country }}</td>
+    </tr>
+
+</tbody>
+</table>
+
+<Table class="table">
+  <thead>
+    <tr class="table-primary">
+      <th>Address:</th>
+  </thead>
+  <tbody>
+    <tr>
+      <th>{{contact.address}}</th>
+    </tr>
+  </tbody>
+</Table>
+{% if contact.notes|striptags|length > 0 and contact.notes|striptags != "None" %}
+<Table class="table">
+  <thead>
+    <tr class="table-primary">
+      <th>Notes:</th>
+  </thead>
+  <tbody>
+    <tr>
+      <th>{{contact.notes}}</th>
+    </tr>
+  </tbody>
+</Table>
+{% endif %}
+<a href="/contacts/edit/{{ contact.id }}">
+  <button type="button" class="btn btn-info">Edit</button>
+</a>
+<br>
+<br>
+<form method="POST" action="/contacts/delete/{{contact.id}}">
+  {% csrf_token %}
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
+</div>
+
+    
+{% endblock%}

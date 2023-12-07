@@ -1,0 +1,41 @@
+{%extends "base.html"%}
+{% block content %} 
+<br>
+<div class="wrapper">
+    <table class="table">
+        <thead>
+      <tr class="table-primary">
+        <th scope="col">Lead Name</th>
+        <th scope="col">Event Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">{{ event.contact.first_name}} {{event.contact.last_name}}</th>
+            <th scope="row">{{ event.event_name }}</th>
+            <td>{{ event.event_location }}</td>
+            <td>{{ event.event_date }}</td>
+            <td>{{ event.event_time }}</td>
+            <td>{{ event.event_description }}</td>
+        </tr>
+    
+    </tbody>
+    </table>
+    
+<a href="/events/edit/{{ event.id }}">
+    <button type="button" class="btn btn-info">Edit</button>
+</a>
+<br>
+<br>
+<form method="POST" action="/events/delete/{{event.id}}">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+    
+{% endblock%}

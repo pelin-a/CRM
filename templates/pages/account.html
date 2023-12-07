@@ -1,0 +1,44 @@
+{% extends "base.html"%}
+{% block content %} 
+
+<div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Account</div>
+  </center>
+  {% if alert_message%}
+  <script>
+      alert("{{alert_message}}");
+  </script>
+  {% endif %}
+  </div>
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" autocomplete="off">
+          {% csrf_token %}
+          Username
+        <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="username" name="username" value={{user.username}} required>
+          </div>
+          First Name
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="first_name" name="first_name" value={{user.first_name}} required>
+          </div>
+          Last Name
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="last_name" name="last_name" value={{user.last_name}} required>
+          </div>
+          Email
+          <div class="form-floating mb-3" >
+            <input type="email" class="form-control" id="email" value={{user.email}} name="email" required>
+          </div>
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+        <br>
+        <a href="/account/change-password">
+            <button type="button" class="btn btn-info">Change Password</button>
+        </a>
+       
+    </div>
+
+</div>
+{% endblock%}

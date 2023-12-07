@@ -1,0 +1,50 @@
+{% extends "base.html"%}
+{% block content %} 
+<br>
+<div class="wrapper">
+  <center>
+    <h2>Your Sales Pipelines</h2>
+  </center>
+  <a href="/pipelines/add">
+    <button type="button" class="btn btn-success">Add Sales Pipeline</button>
+</a>
+<br>
+<br>
+<table class="table table-hover ">
+    <thead>
+  <tr class="table-primary">
+    <th scope="col">N.</th>
+    <th scope="col">Lead Name</th>
+    <th scope="col">Stage</th>
+    <th scope="col">Notes</th>
+    <th></th>
+  </tr>
+</thead>
+<script>
+  function redirectTo(url) {
+    window.location.href = url;
+  }
+</script>
+<tbody>
+  {% load custom_filters %}
+    {% for item in pipelines %}
+    <tr onclick="redirectTo('/pipelines/{{item.id}}')">
+        <th scope="row">{{ forloop.counter }}</th>
+        <th scope="row">{{ item.contact.first_name }} {{ item.contact.last_name }}</th>
+        {% with stage_name=stage_names|get_stage:item.stage %}
+        <td>{{ stage_name }}</td>
+        {% endwith %}
+        <td>{{ item.notes }}</td>
+        <td>
+          <a href="/pipelines/edit/{{ item.id }}">
+            <button type="button" class="btn btn-info">Edit</button>
+          </a>
+      </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+</table>
+</div>
+
+{% endblock%}

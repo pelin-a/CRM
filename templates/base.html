@@ -4,35 +4,67 @@
     {%load static%}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" /><title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/table.css' %}">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+    <title>Document</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
     <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarColor02">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <h2><span class="badge badge-secondary">BasiCRM</span></h2>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
+          {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="/pipelines">Home</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link active" href="/contacts">Leads</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Leads</a>
+            <a class="nav-link active" href="/pipelines">Sales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Sales</a>
-          </li>
+            <a class="nav-link active" href="/events">Events</a>
+          {%endif%}
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-light" type="submit" fdprocessedid="vwqov">Search</button>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {%if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" href="/logout">Log Out</a>
+        </li>
+        <form class="d-flex" method="" action="{% url 'edit_account' %}">
+          <button class="btn btn-outline-light" type="submit" >My Profile</button>
         </form>
+        {%else%}
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/register">Register</a>
+        </li>
+        {%endif%}
+
+      </ul>
       </div>
     </div>
   </nav>
-  <div class="grid gap-0 row-gap-3">
-    <center>
-    <div class="p-2 g-col-6">Add Sales Pipeline</div>
-  </center>
-  </div>
+  {% for message in messages %}
+    {%if message.tags == "success"%}
+    <div class="alert alert-success" role="alert">
+      {{message}}
+    </div>
+    {%elif message.tags == "error"%}
+    <div class="alert alert-warning" role="alert">
+      {{message}}
+    </div>
+
+    {%endif%}
+    {% endfor %}
+
+
+
   {% block content %} {% endblock%}
 
     

@@ -1,40 +1,59 @@
 {% extends "base.html"%}
 {% block content %} 
+  <div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Add Sales Pipeline</div>
+  </center>
+  </div>
     <div class="container-sm">
     <div class="bd-content ps-lg-2">
-        <form  method="post" autocomplete="off">
-          {% csrf_token %}
-        <div class="form-floating mb-3" >
-            <input type="text" class="form-control" id="lead" name="lead" placeholder="Enter Lead Name">
-            <label for="lead">Enter Lead Name</label>
-          </div>
+        <form  method="post" onsubmit="return validateForm()" autocomplete="off">
+          {% csrf_token %}  
           <div class="form-floating mb-3" >
-            <input type="text" class="form-control" id="stage" placeholder="Stage" name="stage">
-            <label for="stage">Stage</label>
+            <select class="form-select"   type="number" id="contact" name="contact" >
+              <option value="0" selected>Lead</option>
+              {%for contact in contact_names%} 
+              <option type="number" value={{contact.id}}>{{contact.first_name}} {{contact.last_name}}</option>
+          {% endfor%}
+            </select>
+            <a href="/contacts/add">
+              <button type="button" class="btn btn-secondary btn-sm">New Contact</button>
+            </a>
           </div>
+          
           <div class="form-floating mb-3" >
             <select class="form-select" id="stage" placeholder="Stage" name="stage">
-              <option selected></option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="0" selected>Stage*</option>
+              <option value="1">New Lead</option>
+              <option value="2">Qualified</option>
+              <option value="3">Meeting Scheduled</option>
+              <option value="4">Proposal Made</option>
+              <option value="5">Negotiating</option>
+              <option value="6">Closed Won</option>
+              <option value="7">Closed Lost</option>
+              
             </select>
           </div>
+          <br>
           <div class="form-floating mb-3" >
             <input type="text" class="form-control" id="notes" placeholder="Add Notes" name="notes" >
-            <label for="stage">Add Notes</label>
-          </div>
-          <h5> Add Event</h5>
-          <div class="form-floating mb-3" >
-            <input type="date" class="form-control" id="dueDate" placeholder="Due Date" name="dueDate">
-          </div>
-          <div class="form-floating mb-3" >
-            <input type="text" class="form-control" id="event" placeholder="event" name="event" >
-            <label for="stage">Enter Event</label>
+            <label for="notes">Add Notes</label>
           </div>
           <button type="submit" value='Post' class="btn btn-primary">Submit</button>
         </form> 
     </div>
+    <script>
+      function validateForm() {
+          // Basic validation using JavaScript
+          var requiredContact = document.getElementById("contact").value;
+          var requiredStage = document.getElementById("stage").value;  
+          if (requiredContact === "0" || requiredStage=== "0" ) {
+              alert("Please fill out the required fields.");  
+              return false;  
+          }
+          return true;
+      }
+    </script>
 
 </div>
 {% endblock%}

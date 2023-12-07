@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+
+{%block content %}
+
+<div class="col-md-6 offset-md-3">
+
+    {% if user.is_authenticated %}
+    <div class="alert alert-success" role="alert">
+        You are logged in!
+      </div>
+
+    {% else %}
+
+  
+    <center><h1>Register</h1></center>
+    
+    <form method="post" action="{% url 'register'%}">
+        {% csrf_token %}
+        <form >
+            <div class="mb-3">
+                <label for="username">Username</label>
+              <input autocomplete="off" type="text" class="form-control" value="{{form.username}}" name="username" placeholder="Enter your username" required>   
+            </div>
+            <div class="mb-3">
+                <label for="first_name">First Name</label>
+              <input autocomplete="off" type="text" class="form-control" value="{{form.first_name}}" name="first_name" placeholder="Enter your first name" required >   
+            </div>
+            <div class="mb-3">
+                <label for="username">Last Name</label>
+              <input autocomplete="off" type="text" class="form-control" value="{{form.last_name}}" name="last_name" placeholder="Enter your last name" required>   
+            </div>
+            <div class="mb-3">
+                <label for="last_name">Email</label>
+              <input autocomplete="off" type="email" class="form-control" value="{{form.email}}" name="email" placeholder="Enter your email" required >
+            </div>
+            <div class="mb-3">
+                <label for="password">Password</label>
+              <input type="password" class="form-control" name="password" value="{{form.password}}" placeholder="Enter your password" required>  
+            </div>
+            <div class="mb-3">
+                <label for="password2">Password</label>
+              <input type="password" class="form-control" name="password2" value="{{form.password2}}" placeholder="Enter your password again" required>  
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    
+    </form>
+     
+
+</div>
+
+{%endif%}
+{%endblock%}

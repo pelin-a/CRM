@@ -1,0 +1,63 @@
+{% extends "base.html"%}
+{% block content %} 
+  <div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Edit Event</div>
+  </center>
+  </div>
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" autocomplete="off">
+          {% csrf_token %}
+          Lead Name
+          <div class="form-floating mb-3" >
+            <select class="form-select"  placeholder="lead" id="contact" name="contact" >
+              <option value={{event.contact.id}}>{{event.contact.first_name}}</option>
+              {%for contact in contact_names%} 
+              <option  value={{contact.id}}>{{contact.first_name}} {{contact.last_name}}</option>
+          {% endfor%}
+            </select>
+          </div>
+          Event Name
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="event_name" name="event_name" value="{{event.event_name}}" required>
+        </div>
+            Event Location
+        <div class="form-floating mb-3" >
+            {%if event.event_location == None or event.event_location == "" or event.event_location == null%}
+            <input type="text" class="form-control" id="event_location" name="event_location" >
+            {% else %}  
+            <input type="text" class="form-control" id="event_location" value="{{event.event_location}}" name="event_location" >
+            {% endif%}
+        </div>
+        Event Date
+        <div class="form-floating mb-3" >
+            
+        <input type="date" class="form-control" id="event_date" value="{{event.event_date|date:'Y-m-d'}}" name="event_date" required >
+        </div>
+            Event Time
+          <div class="form-floating mb-3" >
+            <input type="time" class="form-control" id="event_time" value="{{event.event_time|time:'H:i' }}" name="event_time" required>
+          </div>
+            Event Description
+            <div class="form-floating mb-3" >
+                {%if event.event_description == None or event.event_description == "" or event.event_description == null%}
+                <input type="text" class="form-control" id="event_description" name="event_description" >
+                {% else %}
+                <input type="text" class="form-control" id="event_description" value="{{event.event_description}}" name="event_description" >
+                {% endif%}
+            </div>
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+        <br>
+        <br>
+        <form method="POST" action="/events/delete/{{event.id}}">
+          {% csrf_token %}
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+
+</div>
+{% endblock%}

@@ -1,0 +1,69 @@
+{% extends "base.html"%}
+{% block content %} 
+
+<div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Edit Contact</div>
+  </center>
+  </div>
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" autocomplete="off">
+          {% csrf_token %}
+          Name
+        <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="first_name" name="first_name" value={{contact.first_name}} required>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="last_name" name="last_name" value={{contact.last_name}}>
+          </div>
+          {% if contact.organization == True%}
+            <label for="organization">Organization</label>
+            <input type="checkbox" id="organization" name="organization" checked>
+          {% else %}
+          <label for="organization">Organization</label>
+            <input type="checkbox" id="organization" name="organization">
+            {% endif%}
+            <br>
+          Email
+          <div class="form-floating mb-3" >
+            <input type="email" class="form-control" id="email" value={{contact.email}} name="email" >
+          </div>
+          Phone
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="phone" value={{contact.phone}} name="phone" >
+          </div>
+          Address
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="address" value={{contact.address}} name="address" >
+          </div>
+          City
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="city" value={{contact.city}} name="city" >
+          </div>
+          Country
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="country" value={{contact.country}} name="country" >
+          </div>
+          Notes
+          <div class="form-floating mb-3" >
+            {% if contact.notes == None or contact.notes == "" or contact.notes == null %}
+            <input type="text" class="form-control" id="notes" name="notes" >
+            {% else %}
+            <input type="text" class="form-control" id="notes" value={{contact.notes}} name="notes" >
+            {% endif%}
+          </div>
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+        <br>
+        <br>
+        <form method="POST" action="/contacts/delete/{{contact.id}}">
+          {% csrf_token %}
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+        
+    </div>
+
+</div>
+{% endblock%}

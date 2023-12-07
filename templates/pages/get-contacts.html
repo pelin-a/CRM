@@ -1,0 +1,59 @@
+{% extends "base.html"%}
+{% block content %} 
+<br>
+<div class="wrapper">
+<center>
+  <h2>Your Contacts</h2>
+  </center>
+<a href="/contacts/add">
+    <button type="button" class="btn btn-success">Add Contact</button>
+</a>
+<br>
+<br>
+<table class="table table-hover">
+    <thead>
+  <tr class="table-primary">
+    <th scope="col">N.</th>
+    <th scope="col">Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Organization</th>
+    <th scope="col">Email</th>
+    <th scope="col">Phone</th>
+    <th scope="col">City</th>
+    <th scope="col">Country</th>
+    <th></th>
+  </tr>
+</thead>
+<script>
+  function redirectTo(url) {
+    window.location.href = url;
+  }
+</script>
+<tbody>
+    {% for contact in contacts %}
+    <tr onclick="redirectTo('/contacts/{{contact.id}}')">
+        <th scope="row">{{ forloop.counter }}</th>
+        <th scope="row">{{ contact.first_name }}</th>
+        <th scope="row">{{ contact.last_name }}</th>
+        {% if contact.organization == True %}
+        <td>Yes</td>
+        {% else %}
+        <td>No</td>
+        {% endif %}
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.phone }}</td>
+        <td>{{ contact.city }}</td>
+        <td>{{ contact.country }}</td>
+        <td>
+            <a href="/contacts/edit/{{ contact.id }}">
+              <button type="button" class="btn btn-info">Edit</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
+</table>
+</div>
+
+{% endblock%}

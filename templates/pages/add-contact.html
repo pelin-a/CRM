@@ -1,0 +1,53 @@
+{% extends "base.html"%}
+{% block content %} 
+<div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Add Contact</div>
+  </center>
+  </div>
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" autocomplete="off">
+          {% csrf_token %}
+        <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Enter First Name">
+            <label for="first_name">Enter First Name</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Enter Last Name">
+            <label for="last_name">Enter Last Name</label>
+          </div>
+          
+            <label for="organization">Organization</label>
+            <input type="checkbox" id="organization" placeholder="Organization" name="organization">
+            
+          <div class="form-floating mb-3" >
+            <input type="email" class="form-control" id="email" placeholder="email" name="email" >
+            <label for="email">Enter Email</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="phone" placeholder="phone" name="phone" >
+            <label for="phone">Enter Contact Phone Number</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="address" placeholder="address" name="address" >
+            <label for="address">Enter Address</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="city" placeholder="city" name="city" >
+            <label for="city">City</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="country" placeholder="country" name="country" >
+            <label for="country">Country</label>
+          </div>
+          <div class="form-floating mb-3" >
+            <input type="text" class="form-control" id="notes" placeholder="Add Notes" name="notes" >
+            <label for="notes">Add Notes</label>
+          </div>
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+    </div>
+
+</div>
+{% endblock%}

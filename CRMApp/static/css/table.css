@@ -1,0 +1,266 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #3b3b3b;
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    background: white;
+  }
+  @media screen and (max-width: 580px) {
+    body {
+      font-size: 16px;
+      line-height: 22px;
+    }
+  }
+  
+  .wrapper {
+    margin: 0 auto;
+    padding: 40px;
+    max-width: 1300px;
+  }
+  
+  .table {
+    margin: 0 0 40px 0;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: table;
+  }
+  @media screen and (max-width: 580px) {
+    .table {
+      display: block;
+    }
+  }
+  
+  .row {
+    display: table-row;
+  }
+  .row.header {
+    font-weight: 900;
+    color: #ffffff;
+    background: #ea6153;
+  }
+  .row.green {
+    background: #27ae60;
+  }
+  .row.blue {
+    background: #0066ff;
+  }
+  @media screen and (max-width: 580px) {
+    .row {
+      padding: 14px 0 7px;
+      display: block;
+    }
+    .row.header {
+      padding: 0;
+      height: 6px;
+    }
+    .row.header .cell {
+      display: none;
+    }
+    .row .cell {
+      margin-bottom: 10px;
+    }
+    .row .cell:before {
+      margin-bottom: 3px;
+      content: attr(data-title);
+      min-width: 98px;
+      font-size: 10px;
+      line-height: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #969696;
+      display: block;
+    }
+  }
+  
+  .cell {
+    padding: 6px 12px;
+    display: table-cell;
+  }
+  @media screen and (max-width: 580px) {
+    .cell {
+      padding: 2px 16px;
+      display: block;
+    }
+  }
+/* Table Title */
+.table-tile {
+    display: flex;
+    justify-content: center;
+    color: white;
+    background-color: rgb(35, 32, 190);
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0px 0px 21px -8px black;
+  }
+  .table-tile::before {
+    content: " ";
+    width: 20px;
+    height: 20px;
+    background-color: rgb(32, 42, 190);
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: rotate(45deg);
+  }
+  
+  .table-tile h1 {
+    font-size: 27px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  /* Table Serction  */
+  
+  
+  /* Table Design  */
+  
+  .table-design {
+    margin-top: 60px;
+    border-radius: 1px;
+    box-shadow: 0px 0px 21px -8px black;
+  }
+  
+  /* Table Head */
+  
+  /* Table Body */
+  
+  .t-head {
+    background-color: #0066ff;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    font-size: 20px;
+  }
+  #h {
+    transition: all 0.3s;
+  }
+  
+  #h:hover {
+    background-color: #b3d1ff;
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  }
+  @use postcss-cssnext;
+/* helpers/align.css */
+
+.align {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+/* helpers/animation.css */
+
+.animation {
+  animation-duration: 0.6s;
+  animation-fill-mode: both;
+}
+
+.animation--reverse {
+  animation-direction: reverse;
+}
+
+/* helpers/animation-shake.css */
+
+@keyframes shake-vertical {
+
+  15%,
+  45%,
+  75% {
+    transform: translateY(-0.75rem);
+  }
+
+  30%,
+  60% {
+    transform: translateY(0.75rem);
+  }
+
+}
+
+.animation--shake--vertical {
+  animation-name: shake-vertical;
+  will-change: transform;
+}
+
+:root {
+  --grid-max-width: 40rem;
+  --grid-width: 90%;
+  --grid-gutter: 3%;
+}
+
+.grid {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: var(--grid-max-width);
+  width: var(--grid-width);
+}
+
+.grid__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: calc(var(--grid-gutter) / -2);
+}
+
+.grid__col {
+  margin: calc(var(--grid-gutter) / 2);
+  flex-grow: 1;
+}
+
+/* layout/base.css */
+
+:root {
+  --html-font-size: 100%;
+
+  --body-background-color: #f9f8f5;
+  --body-color: #353535;
+  --body-font-family: 'Roboto';
+  --body-font-family-fallback: sans-serif;
+  --body-font-size: 1rem;
+  --body-font-weight: 400;
+  --body-line-height: 1.5;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: var(--html-font-size);
+  height: 100%;
+}
+
+body {
+  background-color: var(--body-background-color);
+  color: var(--body-color);
+  font-family: var(--body-font-family), var(--body-font-family-fallback);
+  font-size: var(--body-font-size);
+  font-weight: var(--body-font-weight);
+  line-height: var(--body-line-height);
+  margin: 0;
+  min-height: 100%;
+}
+
+/* modules/box.css */
+
+:root {
+  --box-background-color: #fff;
+  --box-padding-horizontal: 2rem;
+  --box-padding-vertical: 3rem;
+}
+
+.box {
+  background-color: var(--box-background-color);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
+  font-size: 6.25rem;
+  padding-bottom: var(--box-padding-vertical);
+  padding-left: var(--box-padding-horizontal);
+  padding-right: var(--box-padding-horizontal);
+  padding-top: var(--box-padding-vertical);
+  text-align: center;
+}

@@ -1,0 +1,40 @@
+{%extends "base.html"%}
+{% block content %} 
+<br>
+<div class="wrapper">
+    <table class="table">
+        <thead>
+      <tr class="table-primary">
+        <th scope="col">Lead Name</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Email</th>
+        <th scope="col">Stage</th>
+        <th scope="col">Notes</th>
+      </tr>
+    </thead>
+    {% load custom_filters %}
+    <tbody>
+        <tr>
+            <th scope="row">{{ pipeline.contact.first_name}} {{pipeline.contact.last_name}}</th>
+            <th scope="row">{{ pipeline.contact.phone }}</th>
+            <td>{{ pipeline.contact.email }}</td>
+            <td>{{ stage_names|get_stage:pipeline.stage }}</td>
+            <td>{{ pipeline.notes }}</td>
+        </tr>
+    
+    </tbody>
+    </table>
+    
+<a href="/pipelines/edit/{{ pipeline.id }}">
+    <button type="button" class="btn btn-info">Edit</button>
+</a>
+<br>
+<br>
+<form method="POST" action="/pipelines/delete/{{pipeline.id}}">
+    {% csrf_token %}
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit" class="btn btn-danger">Delete</button>
+  </form>
+</div>
+    
+{% endblock%}

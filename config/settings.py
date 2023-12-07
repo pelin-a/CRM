@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'CRMApp'
+    'CRMApp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -59,6 +60,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -91,6 +93,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "OPTIONS": {
+            "min_length": 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -125,3 +130,11 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.eu.mailgun.org'
+EMAIL_PORT = 465 
+EMAIL_HOST_USER = 'postaci@mailer.akademiprojeler.live'
+EMAIL_HOST_PASSWORD = 'postaci123'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True

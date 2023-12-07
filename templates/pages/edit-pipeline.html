@@ -1,0 +1,54 @@
+{% extends "base.html"%}
+{% block content %} 
+  <div class="grid gap-0 row-gap-3">
+    <center>
+    <div class="p-2 g-col-6">Edit Sales Pipeline</div>
+  </center>
+  </div>
+    <div class="container-sm">
+    <div class="bd-content ps-lg-2">
+        <form  method="post" autocomplete="off">
+          {% csrf_token %}
+          Lead Name
+          <div class="form-floating mb-3" >
+            <select class="form-select"  placeholder="lead" id="contact" name="contact" >
+              <option value={{pipeline.contact.id}}>{{pipeline.contact.first_name}}</option>
+              {%for contact in contact_names%} 
+              <option  value={{contact.id}}>{{contact.first_name}} {{contact.last_name}}</option>
+          {% endfor%}
+            </select>
+          </div>
+          {% load custom_filters %}
+          Stage
+          <div class="form-floating mb-3" >
+            <select class="form-select" id="stage"  name="stage">
+              <option value="{{pipeline.stage}}" selected>{{stage_names|get_stage:pipeline.stage}}</option>
+              <option value="1">New Lead</option>
+              <option value="2">Qualified</option>
+              <option value="3">Meeting Scheduled</option>
+              <option value="4">Proposal Made</option>
+              <option value="5">Negotiating</option>
+              <option value="6">Closed Won</option>
+              <option value="7">Closed Lost</option>
+            </select>
+          </div>
+          Notes
+          {% if pipeline.notes == None or pipeline.notes == "" or pipeline.notes == null %}
+            <input type="text" class="form-control" id="notes" name="notes" >
+            {% else %}
+            <input type="text" class="form-control" id="notes" value={{pipeline.notes}} name="notes" >
+            {% endif%}
+          <button type="submit" value='Post' class="btn btn-primary">Submit</button>
+        </form> 
+        <br>
+        <br>
+        <form method="POST" action="/pipelines/delete/{{pipeline.id}}">
+          {% csrf_token %}
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+
+</div>
+{% endblock%}
